@@ -8,3 +8,4 @@
 </head>
 <body>
 <main>
+<?php flash() ?>
