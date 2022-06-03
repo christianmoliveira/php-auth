@@ -1,7 +1,5 @@
 <?php
 
-require __DIR__ . '/../config/database.php';
-
 const DEFAULT_VALIDATION_ERRORS = [
     'required' => 'Please enter the %s',
     'email' => 'The %s is not a valid email address',
@@ -13,7 +11,6 @@ const DEFAULT_VALIDATION_ERRORS = [
     'secure' => 'The %s must have between 8 and 64 characters and contain at least one number, one upper case letter, one lower case letter and one special character',
     'unique' => 'The %s already exists',
 ];
-
 
 /**
  * Validate
@@ -36,7 +33,6 @@ function validate(array $data, array $fields, array $messages = []): array
     $errors = [];
 
     foreach ($fields as $field => $option) {
-
         $rules = $split($option, '|');
 
         foreach ($rules as $rule) {
@@ -194,29 +190,6 @@ function is_secure(array $data, string $field): bool
 
     $pattern = "#.*^(?=.{8,64})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$#";
     return preg_match($pattern, $data[$field]);
-}
-
-
-/**
- * Connect to the database and returns an instance of PDO class
- * or false if the connection fails
- *
- * @return PDO
- */
-function db(): PDO
-{
-    static $pdo;
-    // if the connection is not initialized
-    // connect to the database
-    if (!$pdo) {
-        return new PDO(
-            sprintf("mysql:host=%s;dbname=%s;charset=UTF8", DB_HOST, DB_NAME),
-            DB_USER,
-            DB_PASSWORD,
-            [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-        );
-    }
-    return $pdo;
 }
 
 /**
