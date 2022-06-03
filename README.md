@@ -2,10 +2,8 @@
 
 ## Features
 
-- [ ] User Register
-- [ ] User Login
-- [ ] Remember Me
-- [ ] Email Verification
+- [X] User Register
+- [X] User Login
 
 ## Technologies
 
